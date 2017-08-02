@@ -7,8 +7,10 @@ export default class ToDosListItem extends Component {
       isEditing:false
     }
   }
+  
   renderTaskSection() {
     const { task, isCompleted } = this.props;
+
     return (
       <td>{this.props.task}</td>
     );
@@ -25,7 +27,7 @@ export default class ToDosListItem extends Component {
     return(
         <td>
           <button onClick={this.onEditClick.bind(this)}>Edit</button>
-          <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
+          <button>Delete</button>
         </td>
       );
   }

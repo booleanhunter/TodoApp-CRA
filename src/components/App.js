@@ -33,11 +33,16 @@ class App extends Component {
   }
   deleteTask(taskToDelete) {
     // const listItem = this.state.todos.map((todos, index)=>{
-      const newState = this.state.todos;
-      if(newState.indexOf(taskToDelete) > -1) {
-        newState.splice(newState.indexOf(taskToDelete), 1);
-        this.setState({todos: newState})
-      }
+      // const newState = this.state.todos;
+      // if(newState.indexOf(taskToDelete) > -1) {
+      //   newState.splice(newState.indexOf(taskToDelete), 1);
+      //   this.setState({todos: newState})
+      // }
+    const tasks = this.state.todos.slice(0);
+    tasks.splice(taskToDelete, 1);
+    this.setState({
+      todos:tasks
+    })
   }
   render() {
     return (
