@@ -9,15 +9,7 @@ export default class ToDosList extends Component {
   }
   renderItems() {
     // console.log(this.props.toggleTask)
-    return this.props.todos.map(function(todos, index){
-        return(
-              <ToDoListItem key={index} index={index}
-              task={todos.task} isCompleted={todos.isCompleted} 
-              toggleTask={()=>this.props.toggleTask}
-              
-              />
-            );
-        }); 
+    
 
   }
   
@@ -31,12 +23,26 @@ export default class ToDosList extends Component {
       //         <ToDoListItem key={index}
       //         task={todos.task} isCompleted={todos.isCompleted} deleteTask={this.props.deleteTask}/>
       //       );
-      //   });       
+      //   }); 
+
+    var that = this;   
+
+    var todos = this.props.todos.map(function(todos, index){
+      return(
+        <ToDoListItem key={index} index={index}
+        task={todos.task} isCompleted={todos.isCompleted} 
+        toggleTask={that.props.toggleTask} deleteTask={that.props.deleteTask}/>
+      );
+    });  
+
     console.log("this.props.todos: "+ JSON.stringify(this.props.todos));
     return (
       <table>
         <ToDosListHeader />
-        <tbody>{ this.renderItems()}</tbody>
+
+        <tbody>
+          {todos}
+        </tbody>
 
       </table>
   );

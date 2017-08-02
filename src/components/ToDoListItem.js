@@ -5,7 +5,9 @@ export default class ToDosListItem extends Component {
     super();
     this.state = {
       isEditing:false
-    }
+    };
+
+    this.tt = this.tt.bind(this);
   }
 
   tt() {
@@ -20,15 +22,17 @@ export default class ToDosListItem extends Component {
     }; 
     return (
       <td style={taskStyle}
-          onClick={() => this.tt}>
+          onClick={this.tt}>
           {this.props.task}
       </td>
     );
   }
   renderActionsSection() {
+    console.log(this)
     if(this.state.isEditing) {
         return(
           <td>
+          <input type="text"/>
           <button>Save</button>
           <button onClick={this.onClickCancel.bind(this)}>Cancel</button>
           </td>
@@ -37,7 +41,7 @@ export default class ToDosListItem extends Component {
     return(
         <td>
           <button onClick={this.onEditClick.bind(this)}>Edit</button>
-          <button>Delete</button>
+          <button onClick={this.props.deleteTask.bind(this, this.props.index)}>Delete</button>
         </td>
       );
   }

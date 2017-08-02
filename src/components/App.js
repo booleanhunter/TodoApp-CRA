@@ -35,19 +35,21 @@ class App extends Component {
   }
   toggleTask(key) {
     const todos = this.state.todos;
-      todos[key].isChecked = !todos[key].isChecked;
+      todos[key].isCompleted = !todos[key].isCompleted;
       this.setState({
         todos:todos
       })
   }
   deleteTask(taskToDelete) {
+  	console.log("deleteTask is trigerred")
+  	console.log(taskToDelete)
     // const listItem = this.state.todos.map((todos, index)=>{
       // const newState = this.state.todos;
       // if(newState.indexOf(taskToDelete) > -1) {
       //   newState.splice(newState.indexOf(taskToDelete), 1);
       //   this.setState({todos: newState})
       // }
-    const tasks = this.state.todos.slice(0);
+    const tasks = this.state.todos;
     tasks.splice(taskToDelete, 1);
     this.setState({
       todos:tasks
