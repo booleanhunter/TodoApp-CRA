@@ -20,7 +20,9 @@ class App extends Component {
     this.state = {
       todos:todos
     }
-  }
+    this.toggleTask = this.toggleTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
+   }
   createTask(task) {
     this.state.todos.push({
       task:task,
@@ -30,6 +32,13 @@ class App extends Component {
       todos:this.state.todos
     });
 
+  }
+  toggleTask(key) {
+    const todos = this.state.todos;
+      todos[key].isChecked = !todos[key].isChecked;
+      this.setState({
+        todos:todos
+      })
   }
   deleteTask(taskToDelete) {
     // const listItem = this.state.todos.map((todos, index)=>{
@@ -50,7 +59,9 @@ class App extends Component {
         <h1>React ToDos List</h1>
         <CreateToDoList createTask={this.createTask.bind(this)}/>
         <ToDosList todos={this.state.todos}
-                  deleteTask={this.deleteTask.bind(this)}/>
+                  deleteTask={this.deleteTask}
+                  toggleTask={this.toggleTask}
+                  />
       </div>
     );
   }

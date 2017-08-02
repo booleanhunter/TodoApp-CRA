@@ -7,12 +7,22 @@ export default class ToDosListItem extends Component {
       isEditing:false
     }
   }
-  
-  renderTaskSection() {
-    const { task, isCompleted } = this.props;
 
+  tt() {
+    const { task, isCompleted, index } = this.props;
+    this.props.toggleTask(this.props.index);
+  }
+  renderTaskSection() {
+    const { task, isCompleted, index} = this.props;
+    const taskStyle = {
+      color: isCompleted? 'green': 'red',
+      cursor:'pointer'
+    }; 
     return (
-      <td>{this.props.task}</td>
+      <td style={taskStyle}
+          onClick={() => this.tt}>
+          {this.props.task}
+      </td>
     );
   }
   renderActionsSection() {
