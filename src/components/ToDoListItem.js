@@ -8,43 +8,14 @@ export default class ToDosListItem extends Component {
     };
 
     this.tt = this.tt.bind(this);
+    this.saveTask = this.saveTask.bind(this);
   }
 
   tt() {
     const { task, isCompleted, index } = this.props;
     this.props.toggleTask(this.props.index);
   }
-  renderTaskSection() {
-    const { task, isCompleted, index} = this.props;
-    const taskStyle = {
-      color: isCompleted? 'green': 'red',
-      cursor:'pointer'
-    }; 
-    return (
-      <td style={taskStyle}
-          onClick={this.tt}>
-          {this.props.task}
-      </td>
-    );
-  }
-  renderActionsSection() {
-    console.log(this)
-    if(this.state.isEditing) {
-        return(
-          <td>
-          <input type="text"/>
-          <button>Save</button>
-          <button onClick={this.onClickCancel.bind(this)}>Cancel</button>
-          </td>
-      );
-    }
-    return(
-        <td>
-          <button onClick={this.onEditClick.bind(this)}>Edit</button>
-          <button onClick={this.props.deleteTask.bind(this, this.props.index)}>Delete</button>
-        </td>
-      );
-  }
+
   onClickCancel() {
     this.setState({
       isEditing:false
@@ -56,16 +27,47 @@ export default class ToDosListItem extends Component {
     });
   }
 
+  saveTask(){
+    var inputField = document.getElementById("input"+this.props.index);
+    this.props.saveTodo(this.props.index, inputField.value)
+    this.setState({
+      isEditing:false
+    })
+  }
+
   render() {
-    // console.log(this.props.todos)
-    // console.log("{this.props.task} is "+ this.props.task)
-    console.log(this.props.task)
-    return (
+    const { task, isCompleted, index} = this.props;
+    const taskStyle = {
+      color: isCompleted? 'green': 'red',
+      cursor:'pointer'
+    };
+    if(this.state.isEditing) {
+      return (
+        <tr>
+          <td>
+            <input type="text" defaultValue={this.props.task} id={"input"+this.props.index} />
+          </td>
+          <td>
+            
+            <button onClick={this.saveTask}>Save</button>
+            <button onClick={this.onClickCancel.bind(this)}>Cancel</button>
+          </td>
+        </tr>
+      );
+    }else{
+      return (
       <tr>
-        {this.renderTaskSection()}
-        {this.renderActionsSection()}
-        
+        <td style={taskStyle}
+            onClick={this.tt}>
+            {this.props.task}
+        </td>
+
+        <td>
+          <button onClick={this.onEditClick.bind(this)}>Edit</button>
+          <button onClick={this.props.deleteTask.bind(this, this.props.index)}>Delete</button>
+        </td>
       </tr>
-    );
+      )
+    }
   }
 }

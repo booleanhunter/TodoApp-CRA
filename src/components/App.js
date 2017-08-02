@@ -22,6 +22,7 @@ class App extends Component {
     }
     this.toggleTask = this.toggleTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.saveTodo = this.saveTodo.bind(this);
    }
   createTask(task) {
     this.state.todos.push({
@@ -40,6 +41,14 @@ class App extends Component {
         todos:todos
       })
   }
+  saveTodo(index, text) {
+  	const todos = this.state.todos;
+  	todos[index].task = text;
+  	this.setState({
+  		todos: todos
+  	});
+  }
+
   deleteTask(taskToDelete) {
   	console.log("deleteTask is trigerred")
   	console.log(taskToDelete)
@@ -63,6 +72,7 @@ class App extends Component {
         <ToDosList todos={this.state.todos}
                   deleteTask={this.deleteTask}
                   toggleTask={this.toggleTask}
+                  saveTodo={this.saveTodo}
                   />
       </div>
     );

@@ -10,7 +10,6 @@ export default class ToDosList extends Component {
   renderItems() {
     // console.log(this.props.toggleTask)
     
-
   }
   
   render() {
@@ -29,9 +28,9 @@ export default class ToDosList extends Component {
 
     var todos = this.props.todos.map(function(todos, index){
       return(
-        <ToDoListItem key={index} index={index}
+        <ToDoListItem key={index} index={index} ref={"iten"+index}
         task={todos.task} isCompleted={todos.isCompleted} 
-        toggleTask={that.props.toggleTask} deleteTask={that.props.deleteTask}/>
+        toggleTask={that.props.toggleTask} deleteTask={that.props.deleteTask} saveTodo={that.props.saveTodo}/>
       );
     });  
 
